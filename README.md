@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# NextGenPC — Datastalgo Quiz 1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+NextGenPC is a single-page React application showcasing a compact e-commerce experience for gaming PCs and peripherals. It uses React Router for SPA navigation and React Bootstrap for responsive UI components. The app includes a landing page, product catalog, category views, a detailed product page, a shopping cart with persistence, a checkout confirmation page, and a simple user profile page.
 
-## Available Scripts
+## Background
+NextGenPC Angeles is a computer shop based in Angeles, Pampanga. The shop focuses on delivering reliable builds and curated peripherals for gamers, internet cafes (Pisonet setups), and everyday users.
 
-In the project directory, you can run:
+What they do:
+- Custom PC builds tailored to gaming and business needs
+- Durable, high-performance Pisonet setups for computer shops
+- Premium peripherals (keyboards, mice, headsets, monitors)
+- Flexible payment options: cash, GCash, bank transfer, credit/debit cards, and installment plans via Home Credit and BillEase
 
-### `npm start`
+Mission: Provide high-quality components and dependable service, ensuring a premium gaming experience for casual and competitive users.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
+- React (Create React App)
+- React Router for client-side routing
+- React Bootstrap + Bootstrap for UI (Bootswatch compatible)
+- Font Awesome for icons
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
+```
+frontend/
+	public/
+		images/
+		index.html
+	src/
+		App.js
+		index.js
+		index.css
+		products.js
+		components/
+			Header.jsx
+			Footer.jsx
+			Product.jsx
+			Rating.jsx
+		screens/
+			LandingPage.jsx
+			HomeScreen.jsx
+			ProductScreen.jsx
+			PeripheralsScreen.jsx
+			PrebuiltsScreen.jsx
+			CartScreen.jsx
+			CheckoutScreen.jsx
+			UserScreen.jsx
+		context/
+			CartContext.jsx
+```
 
-### `npm test`
+## Routes and Pages
+- `/` — LandingPage
+	- Store introduction and location
+	- Who We Are: background of NextGenPC
+	- What We Do: custom builds, peripherals, support
+	- Services and Products: custom builds, Pisonet setups, payment options
+	- Contact Information: email and Facebook
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `/products` — HomeScreen
+	- Displays all products from `src/products.js` in a responsive grid
+	- Product cards show image, name, rating, reviews, and price
 
-### `npm run build`
+- `/product/:id` — ProductScreen
+	- Detailed product view with image, name, rating, description, and price
+	- Add to Cart button navigates to the cart
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `/peripherals` — PeripheralsScreen
+	- Filters and shows products where `category === 'Peripherals'`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `/prebuilts` — PrebuiltsScreen
+	- Filters and shows products where `category === 'Prebuilts'`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `/cart` — CartScreen
+	- Lists items in the cart with quantity selection and remove option
+	- Displays subtotal and Proceed To Checkout button
 
-### `npm run eject`
+- `/checkout` — CheckoutScreen
+	- Thank-you page with order summary (items and total)
+	- Continue Shopping redirects to `/products` and clears cart
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `/user` — UserScreen
+	- Basic profile form (name, email, password update) with client-side validation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Navigation
+- Header: Home, Products, Categories (Peripherals, Prebuilts), Cart (with item count badge), User (right-aligned)
+- Logo links to `/`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## State Management
+`CartContext` provides cart state and actions:
+- `addToCart(product, qty)`
+- `removeFromCart(id)`
+- `updateQty(id, qty)`
+- `clearCart()`
+- Derived values: `cartItems`, `cartItemsCount`, `cartTotal`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Persistence:
+- Cart is saved to `localStorage` and restored on load for consistent experience across navigation and refreshes.
 
-## Learn More
+## Data
+`src/products.js` contains representative product data:
+- Fields: `_id`, `name`, `image`, `description`, `brand`, `category`, `price`, `countInStock`, `rating`, `numReviews`
+- Images served from `public/images/`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Mobile Responsiveness
+- Bootstrap grid (`Row`, `Col`) with responsive breakpoints (`sm`, `md`, `lg`, `xl`)
+- Product images use fixed height and `object-fit: cover` for consistent card sizes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Client Reference
+- Facebook: https://www.facebook.com/profile.php?id=61571393386812
+- Email: `nextgenpc.gamingrigs@gmail.com`
 
-### Code Splitting
+## Getting Started
+Install dependencies and run locally:
+```powershell
+cd frontend
+npm install
+npm start
+```
+The app will be available at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Build
+Create a production build:
+```powershell
+npm run build
+```
+Outputs to `frontend/build`.
 
-### Analyzing the Bundle Size
+## Deployment
+Serve the `build` folder with any static hosting provider.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Notes
+- Only Bootstrap + React Bootstrap components are used; no additional UI libraries.
+- SPA navigation via React Router (no full page reloads).
+- Clean, maintainable code styled for readability.
