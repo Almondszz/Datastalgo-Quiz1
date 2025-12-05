@@ -132,4 +132,3 @@ Serve the `build` folder with any static hosting provider.
 ## Notes
 - Only Bootstrap + React Bootstrap components are used; no additional UI libraries.
 - SPA navigation via React Router (no full page reloads).
-- Clean, maintainable code styled for readability.
